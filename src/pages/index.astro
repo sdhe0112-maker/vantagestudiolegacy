@@ -1,19 +1,200 @@
----
-import Layout from '../layouts/Layout.astro';
-import Markdown from '../components/Markdown.astro';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANTAGE Studio | Dario Herrera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primario: #000000;
+            --secundario: #ffffff;
+            --acento: #c5a059; /* Dorado Champagne */
+            --gris-suave: #f4f4f4;
+        }
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
----
+        body {
+            background-color: var(--primario);
+            color: var(--secundario);
+            line-height: 1.6;
+        }
 
-<Layout title="Welcome to Astro.">
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
-</Layout>
+        /* --- Header & Nav --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=1000') center/cover;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            color: var(--acento);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        /* --- Secciones --- */
+        section {
+            padding: 100px 10%;
+            text-align: center;
+        }
+
+        .about {
+            background-color: var(--secundario);
+            color: var(--primario);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+
+        /* --- Servicios --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            border: 1px solid #333;
+            padding: 40px;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: var(--acento);
+            transform: translateY(-10px);
+        }
+
+        .service-card h3 {
+            color: var(--acento);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* --- Info Dario --- */
+        .dario-info {
+            background-color: #0a0a0a;
+            border-top: 1px solid #222;
+        }
+
+        .location-box {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px dashed var(--acento);
+            display: inline-block;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 50px;
+            background-color: var(--primario);
+            border-top: 1px solid #222;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #666;
+        }
+
+        .brand-footer {
+            color: var(--secundario);
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Boton Aesthetic */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: transparent;
+            color: var(--acento);
+            border: 1px solid var(--acento);
+            text-decoration: none;
+            transition: 0.4s;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: var(--acento);
+            color: var(--primario);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p class="subtitle">The Art of Grooming</p>
+        <h1>VANTAGE</h1>
+        <p style="max-width: 600px; margin-bottom: 40px;">No es solo un corte, es tu nueva identidad. Bajo la direcci&oacute;n de <strong>Dario Herrera</strong>.</p>
+        <a href="#contacto" class="btn">Reserva tu lugar</a>
+    </header>
+
+    <section class="about">
+        <h2 class="section-title">Nuestra Visi&oacute;n</h2>
+        <p>En <strong>VANTAGE Studio</strong>, rompemos lo cl&aacute;sico para abrazar lo moderno. Dario Herrera ha dise&ntilde;ado un espacio donde la t&eacute;cnica tradicional se encuentra con las tendencias globales.</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Cortes Modernos</h3>
+                <p>Fades, Mullets y estilos urbanos con acabado impecable.</p>
+            </div>
+            <div class="service-card">
+                <h3>Permanentes</h3>
+                <p>Texturizado y rizos para dar volumen y estilo a tu cabello.</p>
+            </div>
+            <div class="service-card">
+                <h3>Cl&aacute;sicos</h3>
+                <p>La elegancia de la vieja escuela que nunca pasa de moda.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="dario-info" id="contacto">
+        <h2 class="section-title" style="color: white;">Encu&eacute;ntranos</h2>
+        <p>Dirigido por: <strong>Dario Herrera</strong></p>
+
+        <div class="location-box">
+            <p>&#x1F4CD; UBICACI&Oacute;N: [ESCRIBE AQU&Iacute; TU DIRECCI&Oacute;N MANUALMENTE]</p>
+            <p>HORARIO: Lunes a S&aacute;bado - 10:00 AM a 8:00 PM</p>
+        </div>
+    </section>
+
+    <footer>
+        <span class="brand-footer">VANTAGE Studio</span>
+        <p>&copy; 2026 Dise&ntilde;ado para la excelencia. Todos los derechos reservados.</p>
+        <p>Propiedad de Dario Herrera</p>
+    </footer>
+
+</body>
+</html>
