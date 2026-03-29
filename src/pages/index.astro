@@ -1,19 +1,275 @@
----
-import Layout from '../layouts/Layout.astro';
-import Markdown from '../components/Markdown.astro';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANTAGE Studio | Dario Herrera</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #050505;
+            --white: #ffffff;
+            --gold: #d4af37;
+            --slate: #1a1a1a;
+            --accent: #8e8e8e;
+        }
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
----
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
 
-<Layout title="Welcome to Astro.">
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
-</Layout>
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+        /* --- Hero Section --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            z-index: -1;
+            filter: grayscale(100%);
+        }
+
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(4rem, 15vw, 10rem);
+            line-height: 0.8;
+            text-transform: uppercase;
+            letter-spacing: -5px;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #fff 30%, #444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 40px;
+        }
+
+        /* --- Seccion Dario Herrera --- */
+        .director-section {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .director-image {
+            width: 100%;
+            height: 600px;
+            background: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=1000') center/cover;
+            filter: grayscale(100%);
+            transition: 0.5s ease;
+        }
+
+        .director-image:hover { filter: grayscale(0%); }
+
+        .director-text h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- Servicios Cards --- */
+        .services {
+            padding: 100px 5%;
+            background: var(--black);
+        }
+
+        .grid-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--slate);
+            padding: 60px 40px;
+            border: 1px solid #333;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .card:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .card span {
+            font-size: 0.8rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* --- Ubicacion (Donde pondras tu direccion) --- */
+        .location {
+            padding: 100px 5%;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .location-box {
+            border: 2px solid var(--white);
+            padding: 50px;
+            display: inline-block;
+            max-width: 600px;
+        }
+
+        .address-text {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* --- Boton Ultra Moderno --- */
+        .btn-modern {
+            padding: 20px 50px;
+            border: 1px solid var(--white);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-modern:hover {
+            color: var(--black);
+            background: var(--white);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 80px 5%;
+            background: #000;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-credits {
+            color: var(--accent);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .director-section { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2000" alt="Barber" class="video-bg">
+
+        <div class="hero-content">
+            <p class="hero-tagline">Premium Grooming Experience</p>
+            <h1>VANTAGE<br>STUDIO</h1>
+            <p style="margin-bottom: 30px; font-weight: 300;">Cortes cl&aacute;sicos, modernos y permanentes por <strong>Dario Herrera</strong>.</p>
+            <a href="#booking" class="btn-modern">Reserva Ahora</a>
+        </div>
+    </header>
+
+    <section class="director-section">
+        <div class="director-image"></div>
+        <div class="director-text">
+            <span>DIRECTOR CREATIVO</span>
+            <h2>Dario Herrera</h2>
+            <p>Con a&ntilde;os de experiencia en la industria, Dario Herrera ha creado un concepto donde el estilo no es una opci&oacute;n, sino una norma. Aqu&iacute; transformamos tu imagen con t&eacute;cnicas de vanguardia.</p>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="grid-services">
+            <div class="card">
+                <span>01</span>
+                <h3>MODERN FADES</h3>
+                <p>Texturizados, Mid Fades y estilos que marcan tendencia mundial.</p>
+            </div>
+            <div class="card">
+                <span>02</span>
+                <h3>PERMANENTES</h3>
+                <p>Cambia tu estructura. Rizos y volumen con productos de alta gama.</p>
+            </div>
+            <div class="card">
+                <span>03</span>
+                <h3>CLASSIC CUTS</h3>
+                <p>Old school grooming para el caballero que valora la tradici&oacute;n.</p>
+            </div>
+            <div class="card">
+                <span>04</span>
+                <h3>SPA CAPILAR</h3>
+                <p>Tratamientos para el cuero cabelludo y ritual de barba con toalla caliente.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="location" id="booking">
+        <div class="location-box">
+            <h2 style="font-family: 'Syne'; margin-bottom: 10px;">VIS&Iacute;TANOS</h2>
+            <p class="address-text">
+                Calle Ficticia 123, Colonia Centro, Ciudad, Pa&iacute;s.
+            </p>
+            <p style="color: var(--gold);">Dario Herrera te espera para tu pr&oacute;ximo cambio.</p>
+        </div>
+    </section>
+
+    <footer>
+        <span class="footer-logo">VANTAGE</span>
+        <p class="footer-credits">Propiedad de Dario Herrera &copy; 2026</p>
+        <p style="color: #444; margin-top: 20px; font-size: 10px;">VANTAGE STUDIO - TU MEJOR VERSI&Oacute;N COMIENZA AQU&Iacute;</p>
+    </footer>
+
+</body>
+</html>
